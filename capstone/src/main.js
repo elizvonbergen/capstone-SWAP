@@ -1,42 +1,31 @@
 import { createApp } from 'vue'
 import App from './Homepage.vue'
-import * as VueRouter from 'vue-router'
+import router from './router'
 
-//import pages below
-import HomeViewPage from './pages/HomeViewPage.vue'
-import TradePage from './pages/TradePage.vue'
-import ClothingPage from './pages/ClothingPage.vue'
-import ClothingDetailPage from './pages/ClothingDetailPage.vue'
-import LoginPage from './pages/LoginPage.vue'
-import SignupPage from './pages/SignupPage.vue'
-import ProfilePage from './pages/ProfilePage.vue'
+//import firebase authentication
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase/firebase'
 
-//routing for different views
-createApp(App)
-.use(VueRouter.createRouter({
-    history: VueRouter.createWebHistory(process.env.BASE_URL),
-    routes: [{
-        path: '/',
-        component: HomeViewPage, 
-    }, {
-        path: '/trade',
-        component: TradePage,
-    }, {
-        path: '/clothing',
-        component: ClothingPage,
-    }, {
-        path: '/clothing/:clothingId',
-        component: ClothingDetailPage,
-    }, {
-        path: '/signup',
-        component: SignupPage,
-    }, { 
-        path: '/login',
-        component: LoginPage,
-    }, {
-        path: '/profile/:userId',
-        component: ProfilePage,
+let isUserchecked = false
+router.beforeEach((to, from, next) => {
+    if (!isUserchecked) {
+        onAuthStateChanged(auth, (user) => {
+            isUserchecked = true
+
+            if (to.path === '/profile' && !user) {
+                next('/login') // redirect to login if not
+            } else {
+                next()
+            }
+        })
+    } else {
+        const user = auth.currentUser
+        if (to.path === '/profile' && !user) {
+            next('/login')
+        } else {
+            next()
+        }
     }
-    ]
-}))
-.mount('#app')
+})
+
+createApp(App).use(router).mount('#app')
