@@ -12,28 +12,26 @@
           <button>Log In</button>
         </RouterLink>
       </div>
-  
+
       <div>
-        <div>
-          <h3>👚 List Your Clothes</h3>
-          <p>Upload items from your closet that you’re ready to let go of.</p>
-        </div>
-        <div>
-          <h3>🔄 Browse & Swap</h3>
-          <p>Find clothes listed by others and request swaps easily.</p>
-        </div>
-        <div>
-          <h3>🌱 Stay Sustainable</h3>
-          <p>Help reduce waste and refresh your wardrobe the eco-friendly way.</p>
-        </div>
+        <button @click="logout">Log Out</button>
       </div>
     </section>
   </template>
 
-<script>
-export default {
-name: 'HomeViewPage',
-components: {
-}
+<script setup>
+import { getAuth, signOut } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const auth = getAuth()
+
+const logout = async () =>{
+  try {
+    await signOut(auth)
+    router.push('/login')
+  } catch (err) {
+    console.error('Error signing out...', err)
+  }
 }
 </script>

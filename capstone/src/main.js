@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
             isUserchecked = true
 
             //redirects to profile if user tries to go to login/signup
-            if ((to.path === '/profile' || to.path === '/signup') && user) {
+            if ((to.path === '/login' || to.path === '/signup') && user) {
                 next(`/profile/${user.uid}`) // redirect to own profile
             } else if (to.path.startsWith('/profile') && !user) {
                 next('/login')
@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
     } else {
         const user = auth.currentUser
 
-        if ((to.path === '/profile' || to.path === '/signup')&& user) {
+        if ((to.path === '/login' || to.path === '/signup')&& user) {
             next(`/profile/${user.uid}`)
         } else if (to.path.startsWith('/profile') && !user) {
             next('/login')
