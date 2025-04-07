@@ -6,21 +6,29 @@ import router from './router'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase/firebase'
 
+//checks if user is logged in
 let isUserchecked = false
+
 router.beforeEach((to, from, next) => {
     if (!isUserchecked) {
         onAuthStateChanged(auth, (user) => {
             isUserchecked = true
 
-            if (to.path === '/profile' && !user) {
-                next('/login') // redirect to login if not
+            //redirects to profile if user tries to go to login/signup
+            if ((to.path === '/profile' || to.path === '/signup') && user) {
+                next(`/profile/${user.uid}`) // redirect to own profile
+            } else if (to.path.startsWith('/profile') && !user) {
+                next('/login')
             } else {
                 next()
             }
         })
     } else {
         const user = auth.currentUser
-        if (to.path === '/profile' && !user) {
+
+        if ((to.path === '/profile' || to.path === '/signup')&& user) {
+            next(`/profile/${user.uid}`)
+        } else if (to.path.startsWith('/profile') && !user) {
             next('/login')
         } else {
             next()
