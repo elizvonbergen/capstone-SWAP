@@ -24,7 +24,7 @@ const routes = [{
         path: '/newlisting',
         component: CreateListingPage
     }, {
-        path: '/clothing/:clothingId',
+        path: '/clothing/:listingId',
         component: ClothingDetailPage,
     }, {
         path: '/signup',
