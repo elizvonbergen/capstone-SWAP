@@ -10,6 +10,10 @@ import { auth } from './firebase/firebase'
 let isUserchecked = false
 
 router.beforeEach((to, from, next) => {
+    if ((to.path === '/newlisting')) {
+        alert('You are not logged in!')
+        next(from)
+    }
     if (!isUserchecked) {
         onAuthStateChanged(auth, (user) => {
             isUserchecked = true
@@ -17,8 +21,6 @@ router.beforeEach((to, from, next) => {
             //redirects to profile if user tries to go to login/signup
             if ((to.path === '/login' || to.path === '/signup') && user) {
                 next(`/profile/${user.uid}`) // redirect to own profile
-            } else if (to.path.startsWith('/profile') && !user) {
-                next('/')
             } else {
                 next()
             }
@@ -28,8 +30,6 @@ router.beforeEach((to, from, next) => {
 
         if ((to.path === '/login' || to.path === '/signup')&& user) {
             next(`/profile/${user.uid}`)
-        } else if (to.path.startsWith('/profile') && !user) {
-            next('/')
         } else {
             next()
         }
