@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
             if ((to.path === '/login' || to.path === '/signup') && user) {
                 next(`/profile/${user.uid}`) // redirect to own profile
             } else if (to.path.startsWith('/profile') && !user) {
-                next('/login')
+                next('/')
             } else {
                 next()
             }
@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
         if ((to.path === '/login' || to.path === '/signup')&& user) {
             next(`/profile/${user.uid}`)
         } else if (to.path.startsWith('/profile') && !user) {
-            next('/login')
+            next('/')
         } else {
             next()
         }
