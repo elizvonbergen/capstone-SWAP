@@ -8,6 +8,7 @@ import ClothingDetailPage from './pages/ClothingDetailPage.vue'
 import LoginPage from './pages/LoginPage.vue'
 import SignupPage from './pages/SignupPage.vue'
 import ProfilePage from './pages/ProfilePage.vue'
+import CreateListingPage from './pages/CreateListingPage.vue'
 
 //routing for different views
 const routes = [{
@@ -19,6 +20,9 @@ const routes = [{
     }, {
         path: '/clothing',
         component: ClothingPage,
+    }, {
+        path: '/newlisting',
+        component: CreateListingPage
     }, {
         path: '/clothing/:clothingId',
         component: ClothingDetailPage,
