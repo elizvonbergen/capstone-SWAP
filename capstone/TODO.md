@@ -10,13 +10,15 @@
 - [x] error messages for invalid input
 
 ### PROFILE
-- [ ] include information on page
+- [x] include information on page
+- [x] show specific information currently viewed profile is the logged user's
 - [ ] show current user's listings
-- [ ] show specific information currently viewed profile is the logged user's (edit profile, etc......)
+- [ ] allow user to edit THEIR OWN profile
 
 ### CLOTHING DETAILS
-- [ ] fill page with content
+- [x] fill page with content
+- [ ] add swap request button that directs to swap form page
 
-### TRADE REQUEST
+### SWAP REQUEST
 - [ ] create request form in db
 - [ ] fill page with content
