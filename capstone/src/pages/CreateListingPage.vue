@@ -31,7 +31,7 @@ const submitListing = async() => {
     }
 
     try {
-        const docRef = addDoc(collection(db, 'listings'), {
+        const docRef = await addDoc(collection(db, 'listings'), {
             name: name.value,
             description: description.value,
             imageUrl: imageUrl.value,

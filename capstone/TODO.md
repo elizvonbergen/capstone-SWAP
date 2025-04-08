@@ -7,7 +7,7 @@
 - [ ] show listings from all users
 
 ### SIGNUP & LOGIN
-- [ ] error messages for invalid input
+- [x] error messages for invalid input
 
 ### PROFILE
 - [ ] include information on page
@@ -18,4 +18,5 @@
 - [ ] fill page with content
 
 ### TRADE REQUEST
+- [ ] create request form in db
 - [ ] fill page with content
