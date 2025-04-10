@@ -18,13 +18,13 @@ const routes = [{
         path: '/trade',
         component: TradePage,
     }, {
-        path: '/clothing',
+        path: '/listings',
         component: ClothingPage,
     }, {
         path: '/newlisting',
         component: CreateListingPage
     }, {
-        path: '/clothing/:listingId',
+        path: '/listings/:listingId',
         component: ClothingDetailPage,
     }, {
         path: '/signup',

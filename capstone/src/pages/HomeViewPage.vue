@@ -10,7 +10,7 @@
       <h2>Newest Listings</h2>
       <ul>
         <li v-for="item in userListings" :key="item.id">
-          <p><RouterLink :to="`/clothing/${item.id}`">{{ item.name }}</RouterLink></p>
+          <p><RouterLink :to="`/listings/${item.id}`">{{ item.name }}</RouterLink></p>
           <p><RouterLink :to="`/profile/${item.ownerId}`">{{ item.ownerUsername }}</RouterLink></p>
           <p>{{ item.description }}</p>
           <img v-bind:src="item.imageUrl" style="max-width:30%">
