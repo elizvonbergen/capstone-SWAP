@@ -4,17 +4,26 @@
     <p>Description: {{ listingInfo?.description }}</p>
     <img v-bind:src="listingInfo?.imageUrl" style="max-width: 30%;">
     <p>Date added: {{ formattedDate }}</p>
+
+    <!-- button shown for swap req if NOT the owner -->
+     <button v-if="showSwapButton" @click="swapRequestForm"> Request Swap </button>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { db } from '../firebase/firebase'
+import { useRoute, useRouter } from 'vue-router'
+import { db, auth } from '../firebase/firebase'
 import { doc, getDoc } from 'firebase/firestore'
 
 const route = useRoute()
+const router = useRouter()
 const listingId = route.params.listingId
 const listingInfo = ref(null)
+const showSwapButton = ref(false)
+
+const swapRequestForm = () => {
+  router.push(`/swap`)
+}
 
 const formattedDate = computed(() => { //formats timestamp to date
   if (listingInfo.value?.createdAt) {
@@ -34,6 +43,10 @@ onMounted(async () => {
   const listingDoc = await getDoc(doc(db, 'listings', listingId))
   if (listingDoc.exists()) {
     listingInfo.value = listingDoc.data()
+
+    if (auth.currentUser && auth.currentUser.uid !== listingInfo.value.ownerId) {
+      showSwapButton.value = true
+    }
   }
 }
 )

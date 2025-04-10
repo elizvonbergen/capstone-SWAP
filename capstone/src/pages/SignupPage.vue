@@ -39,7 +39,7 @@ const signup = async () => {
   try {
     //regex for valid user/pass
     const userRegex = /^(?=.*?[a-zA-Z0-9])[a-zA-Z0-9_]{6,20}$/
-    const passRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&]).{6,}$/
+    const passRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!?@#$%&]).{6,}$/
 
     //check if username exists already
     const usersRef = collection(db, 'users')

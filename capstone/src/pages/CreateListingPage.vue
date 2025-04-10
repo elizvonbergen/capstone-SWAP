@@ -85,7 +85,7 @@ const submitListing = async() => {
             createdAt: serverTimestamp(),
         })
         //push to details for new listing
-        router.push(`/clothing/${docRef.id}`)
+        router.push(`/listings/${docRef.id}`)
     } catch (err) {
         console.error(err)
         imageErrorMessage.value = ('Failed to create listing. Please try again.')

@@ -4,7 +4,7 @@
 
 <script>
     export default {
-  name: 'TradeRequestPage',
+  name: 'SwapPage',
   components: {
   }
 }

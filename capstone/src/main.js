@@ -10,18 +10,17 @@ import { auth } from './firebase/firebase'
 let isUserchecked = false
 
 router.beforeEach((to, from, next) => {
-    if ((to.path === '/newlisting')) {
-        alert('You are not logged in!')
-        next(from)
-    }
     if (!isUserchecked) {
         onAuthStateChanged(auth, (user) => {
             isUserchecked = true
-
             //redirects to profile if user tries to go to login/signup
             if ((to.path === '/login' || to.path === '/signup') && user) {
                 next(`/profile/${user.uid}`) // redirect to own profile
-            } else {
+            } else if (to.path === '/newlisting' && !user) {
+                alert('You must be logged in to create a new listing.')
+                next(from.path) //return to previous path
+            }
+            else {
                 next()
             }
         })

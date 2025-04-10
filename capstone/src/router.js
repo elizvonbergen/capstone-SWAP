@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 //import pages
 import HomeViewPage from './pages/HomeViewPage.vue'
-import TradePage from './pages/TradePage.vue'
+import SwapPage from './pages/SwapPage.vue'
 import ClothingPage from './pages/ClothingPage.vue'
 import ClothingDetailPage from './pages/ClothingDetailPage.vue'
 import LoginPage from './pages/LoginPage.vue'
@@ -15,8 +15,8 @@ const routes = [{
         path: '/',
         component: HomeViewPage, 
     }, {
-        path: '/trade',
-        component: TradePage,
+        path: '/swap',
+        component: SwapPage,
     }, {
         path: '/listings',
         component: ClothingPage,
