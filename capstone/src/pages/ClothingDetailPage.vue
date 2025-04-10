@@ -22,7 +22,7 @@ const listingInfo = ref(null)
 const showSwapButton = ref(false)
 
 const swapRequestForm = () => {
-  router.push(`/swap`)
+  router.push(`/swap/${listingId}`)
 }
 
 const formattedDate = computed(() => { //formats timestamp to date

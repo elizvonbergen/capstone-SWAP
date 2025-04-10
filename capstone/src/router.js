@@ -15,7 +15,7 @@ const routes = [{
         path: '/',
         component: HomeViewPage, 
     }, {
-        path: '/swap',
+        path: '/swap/:listingId',
         component: SwapPage,
     }, {
         path: '/listings',
