@@ -2,7 +2,7 @@
     <h1>{{  userProfile?.name || 'User' }}</h1>
     <p>Username: {{ userProfile?.username }}</p>
     <p v-if="isOwner">Email: {{ userProfile?.email }}</p>
-    <RouterLink to="/newlisting"><button>Add New Listing</button></RouterLink>
+    <RouterLink to="/newlisting"><button v-if="isOwner">Add New Listing</button></RouterLink>
   <div>
     <h2>Listings</h2>
     <ul>
