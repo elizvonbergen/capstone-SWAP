@@ -2,6 +2,7 @@
     <nav v-if="!isLoginOrSignup" class="navbar">
         <ul>
             <li><RouterLink to="/"> Home </RouterLink></li>
+            <li><RouterLink to="/listings"> Listings </RouterLink></li>
 
             <!-- if not logged in... -->
             <li v-if="!user"><RouterLink to="/login"> Login </RouterLink></li>
