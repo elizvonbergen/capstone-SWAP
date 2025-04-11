@@ -16,6 +16,9 @@
       </select>
 
       <button @click="sendRequest"> Send Request </button>
+      <p v-if="successMessage"> 
+        {{ successMessage }}
+       </p>
     </div>
 </template>
 
@@ -30,6 +33,7 @@ const listingId = route.params.listingId
 const listing = ref(null)
 const userItems = ref([])
 const selectedItemId = ref(null)
+const successMessage = ref('')
 
 onMounted(async () => {
   const listingDoc = await getDoc(doc(db, 'listings', listingId))
@@ -60,6 +64,8 @@ const sendRequest = async () => {
     status: 'pending',
     timestamp: serverTimestamp(),
 })
+// show message upon successful send
+successMessage.value = 'Swap request sent successfully!'
 }
 
 </script>

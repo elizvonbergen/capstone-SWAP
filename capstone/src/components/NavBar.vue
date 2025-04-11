@@ -10,6 +10,7 @@
 
             <!-- if logged in... -->
             <li v-if="user"><RouterLink :to="`/profile/${user.uid}`"> Profile </RouterLink></li>
+            <li v-if="user"><RouterLink :to="`/swaprequests`"> Swap Requests </RouterLink></li>
             <li v-if="user"><button @click="logout">Log Out</button></li>
         </ul>
     </nav>

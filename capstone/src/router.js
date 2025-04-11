@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage.vue'
 import SignupPage from './pages/SignupPage.vue'
 import ProfilePage from './pages/ProfilePage.vue'
 import CreateListingPage from './pages/CreateListingPage.vue'
+import SwapRequestsPage from './pages/SwapRequestsPage.vue'
 
 //routing for different views
 const routes = [{
@@ -36,6 +37,9 @@ const routes = [{
         path: '/profile/:userId',
         component: ProfilePage,
         props: true,
+    }, {
+        path: '/swaprequests',
+        component: SwapRequestsPage,
     }
 ]
 
