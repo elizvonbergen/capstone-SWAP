@@ -16,7 +16,7 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { db } from '../firebase/firebase'
-import { collection, getDocs, query, orderBy, doc, getDoc } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy, doc, getDoc, where } from 'firebase/firestore'
 
 const userListings = ref([])
 const searchQuery = ref('')
@@ -31,6 +31,7 @@ onMounted(async () => {
     const listingsRef = collection(db, 'listings')
     const listingsQuery = query(
       listingsRef,
+      where('isApproved', '!=', true),
       orderBy('createdAt', 'desc'),
     )
     const querySnapshot = await getDocs(listingsQuery)

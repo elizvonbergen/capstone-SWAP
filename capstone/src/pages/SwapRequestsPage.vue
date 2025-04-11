@@ -69,6 +69,11 @@ const updateStatus = async (requestId, newStatus) => {
         if (request) {
             request.status = newStatus
         }
+
+        if (newStatus === 'approved' && request?.receiverListingId) {
+            const listingRef = doc(db, 'listings', request.receiverListingId)
+            await updateDoc(listingRef, { isApproved: true })
+        }
     } catch (err) {
         console.error('Error updating request status. ', err)
     }

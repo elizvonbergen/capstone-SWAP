@@ -83,6 +83,7 @@ const submitListing = async() => {
             imageUrl,
             ownerId: user.uid,
             createdAt: serverTimestamp(),
+            isApproved: false,
         })
         //push to details for new listing
         router.push(`/listings/${docRef.id}`)
