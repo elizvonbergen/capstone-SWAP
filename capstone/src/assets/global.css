@@ -85,7 +85,7 @@ body {
 }
 
 .itemName {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   font-family: 'Lucida Sans', sans-serif;
 } .itemOwner {
@@ -93,7 +93,7 @@ body {
   font-style: italic;
   font-weight: light;
 } .itemDesc {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .search {
@@ -142,7 +142,7 @@ body {
 } .signup input {
   margin: 10px;
 } .signup button {
-  margin-top: 20px;
+  margin: 20px 90px 0px;
 }
 
 .popup {
@@ -171,7 +171,7 @@ body {
 } .login input {
   margin: 10px;
 } .login button {
-  margin-top: 20px;
+  margin: 20px 90px 0px;
 }
 
 /* listing details */
@@ -191,8 +191,8 @@ body {
 
 .listingDetailsImg img {
   margin: 40px 100px;
-  max-width: 500px;
-  width: 100%;
+  max-width: 400px;
+  width: 70%;
   border-radius: 10px;
   object-fit: cover;
 }
