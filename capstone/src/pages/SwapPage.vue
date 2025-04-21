@@ -1,12 +1,15 @@
 <template>
-    <h1>Swap Request</h1>
-
-    <div v-if="listing">
-      <p>You are requesting: {{ listing.name }}</p>
+  <div class="swapReqContainer">
+    <div v-if="listing" class="swapReq">
+      <p><b>You are requesting:</b> <i>{{ listing.name }}</i></p>
       <img :src="listing.imageUrl" style="max-width:30%" />
     </div>
 
-    <div v-if="userItems.length">
+    <div v-if="userItems.length" class="swapOffer">
+      <p v-if="successMessage" class="popup"> 
+        {{ successMessage }}
+      </p>
+      <h1>Swap Request</h1>
       <label>Select an item to offer:</label>
       <select v-model="selectedItemId">
 
@@ -16,10 +19,8 @@
       </select>
 
       <button @click="sendRequest"> Send Request </button>
-      <p v-if="successMessage"> 
-        {{ successMessage }}
-       </p>
     </div>
+  </div>
 </template>
 
 <script setup>

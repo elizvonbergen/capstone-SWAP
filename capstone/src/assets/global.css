@@ -224,3 +224,46 @@ body {
   margin: 6px 0 0 0;
   font-size: 20px;
 }
+
+/* swap request */
+.swapReqContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 50px;
+  align-items: flex-start;
+  padding: 30px;
+  max-width: 80%;
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.swapReq {
+  width: 40%;
+  font-size: 20px;
+  text-align: center;
+}
+.swapReq img {
+  margin: 20px 100px;
+  border-radius: 10px;
+
+}
+
+.swapOffer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: center;
+  gap: 6px;
+  padding: 10px;
+} .swapOffer label {
+  margin-bottom: 5px;
+} .swapOffer select {
+  width: 30%;
+  margin-bottom: 5px;
+} .swapOffer button {
+  width: 20%;
+}
