@@ -1,12 +1,18 @@
 <template>
-    <h1>Clothing Details</h1>
-    <h2>Name: {{ listingInfo?.name }}</h2>
-    <p>Description: {{ listingInfo?.description }}</p>
-    <img v-bind:src="listingInfo?.imageUrl" style="max-width: 30%;">
-    <p>Date added: {{ formattedDate }}</p>
+  <div class="listingDetails">
+    <div class="listingDetailsImg">
+      <img v-bind:src="listingInfo?.imageUrl">
+    </div>
 
-    <!-- button shown for swap req if NOT the owner -->
-     <button v-if="showSwapButton" @click="swapRequestForm"> Request Swap </button>
+    <div class="listingDetailsInfo">
+      <h1>{{ listingInfo?.name }}</h1>
+      <p id="owner"><b>Posted by:</b> <i>{{ ownerUsername }}</i></p>
+      <p id="listedDate"><b>Listing added:</b> {{ formattedDate }}</p>
+      <p><b>Description:</b> {{ listingInfo?.description }}</p>
+      <!-- button shown for swap req if NOT the owner -->
+      <button v-if="showSwapButton" @click="swapRequestForm"> Request Swap </button>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -20,6 +26,7 @@ const router = useRouter()
 const listingId = route.params.listingId
 const listingInfo = ref(null)
 const showSwapButton = ref(false)
+const ownerUsername = ref("")
 
 const swapRequestForm = () => {
   router.push(`/swap/${listingId}`)
@@ -38,6 +45,23 @@ const formattedDate = computed(() => { //formats timestamp to date
   return ''
 })
 
+async function getUserById(userId) {
+  try {
+    const docRef = doc(db, "users", userId)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      return docSnap.data()
+    } else {
+      console.warn("No user")
+      return null
+    }
+  } catch (err) {
+    console.error("Error:", err)
+    return null
+  }
+}
+
 onMounted(async () => {
   //get listing info
   const listingDoc = await getDoc(doc(db, 'listings', listingId))
@@ -46,6 +70,14 @@ onMounted(async () => {
 
     if (auth.currentUser && auth.currentUser.uid !== listingInfo.value.ownerId) {
       showSwapButton.value = true
+    }
+  }
+
+  //get owner username
+  if (listingInfo.value?.ownerId) {
+    const user = await getUserById(listingInfo.value.ownerId)
+    if(user) {
+      ownerUsername.value = user.username
     }
   }
 }
