@@ -1,4 +1,5 @@
 <template>
+  <div class="login">
     <h1>Log In</h1>
     <form @submit.prevent="login">
       <input v-model="email" placeholder="Email" />
@@ -6,14 +7,15 @@
       <button type="submit">Log In</button>
       <p v-if="error">{{ error }}</p>
 
-      <div v-if="errorMessage.length" class="popup"> <!-- error popup for invalid username -->
+      <div v-if="errorMessage.length"> <!-- error popup for invalid username -->
         <ul>
-          <li v-if="errorMessage" class="error-popup">
+          <li v-if="errorMessage" class="popup">
             {{ errorMessage }}
           </li>
         </ul>
        </div>
     </form>
+  </div>
 </template>
 
 <script setup>

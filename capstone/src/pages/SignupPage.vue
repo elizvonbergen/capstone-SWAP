@@ -1,4 +1,5 @@
 <template>
+  <div class="signup">
     <h1>Sign Up</h1>
     <form @submit.prevent="signup"> <!-- login form -->
       <input v-model="name" placeholder="First Name" />
@@ -8,14 +9,15 @@
       <button type="submit">Sign Up</button>
       <p v-if="error">{{ error }}</p>
 
-       <div v-if="errorMessage.length" class="popup"> <!-- error popup for invalid username -->
+       <div v-if="errorMessage.length"> <!-- error popup for invalid username -->
         <ul>
-          <li v-for="(message, index) in errorMessage" :key="index">
+          <li v-for="(message, index) in errorMessage" :key="index" class="popup">
             {{ message }}
           </li>
         </ul>
        </div>
     </form>
+  </div>
 </template>
 
 <script setup>
