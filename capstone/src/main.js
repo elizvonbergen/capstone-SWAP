@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import App from './Homepage.vue'
 import router from './router'
+// styling
+import './assets/global.css'
+
 
 //import firebase authentication
 import { onAuthStateChanged } from 'firebase/auth'
