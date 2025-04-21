@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <div class="createListing">
         <h1>Create New Listing</h1>
         <form @submit.prevent="submitListing">  <!-- form for new item -->
             <input v-model="name" placeholder="Clothing Name" />
+            <textarea v-model="description" placeholder="Description of item
+
+Please add information such as brand, color, quality, etc..."></textarea>
             <input type="file" @change="onChangeFile" name="file" />
             <img v-if="file" :src="filePreviewUrl" alt="Preview" style="max-width: 30%;" /> <!-- img preview-->
-            <textarea v-model="description" placeholder="Description"></textarea>
             <button type="submit">Post Listing</button>
         </form>
 
