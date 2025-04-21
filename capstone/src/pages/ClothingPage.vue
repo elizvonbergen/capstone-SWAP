@@ -1,7 +1,9 @@
 <template>
     <section>
-      <h1>Current Listings</h1>
-      <input v-model="searchQuery" placeholder="Search by name..." /> <!-- search function -->
+      <div class="search">
+        <h1>Current Listings</h1>
+        <input v-model="searchQuery" placeholder="Search by item name..." /> <!-- search function -->
+      </div>
       <ul class="listingContainer">
         <li v-for="item in searchListings" :key="item.id" class="listing">
           <img v-bind:src="item.imageUrl">

@@ -15,6 +15,14 @@ body {
     padding: 20px;
   }
   
+  input {
+    padding: 6px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  } input :focus {
+    border: 3px solid #555;
+  }
+
   button {
     font-family: 'Segoe UI', sans-serif;
     padding: 8px 16px;
@@ -82,6 +90,15 @@ body {
   font-weight: light;
 } .itemDesc {
   font-size: 18px;
+}
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 10px;
+} .search input {
+  margin-left: 50px;
+  width: 25%;
 }
 
 /* profile */
