@@ -8,12 +8,14 @@
 
     <section>
       <h2>Newest Listings</h2>
-      <ul>
-        <li v-for="item in userListings" :key="item.id">
-          <p><RouterLink :to="`/listings/${item.id}`">{{ item.name }}</RouterLink></p>
-          <p><RouterLink :to="`/profile/${item.ownerId}`">{{ item.ownerUsername }}</RouterLink></p>
-          <p>{{ item.description }}</p>
-          <img v-bind:src="item.imageUrl" style="max-width:30%">
+      <ul class="listingContainer">
+        <li v-for="item in userListings" :key="item.id" class="listing">
+          <img v-bind:src="item.imageUrl">
+          <div class="listingInfo">
+            <p class="itemName"><RouterLink :to="`/listings/${item.id}`">{{ item.name }}</RouterLink></p>
+            <p class="itemOwner"><RouterLink :to="`/profile/${item.ownerId}`">{{ item.ownerUsername }}</RouterLink></p>
+            <p class="itemDesc">{{ item.description }}</p>
+          </div>
         </li>
       </ul> 
     </section>

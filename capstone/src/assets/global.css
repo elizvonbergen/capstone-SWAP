@@ -27,3 +27,56 @@ body {
   button:hover {
     background-color: #45a049;
   }  
+
+  /* CLASSES */
+
+.listing {
+  flex: 0 1 calc(50% - 30px);
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+} .listing img {
+  width: 350px;
+  height: auto;
+  margin-top: 10px;
+  object-fit: cover;
+  align-items: center;
+}
+
+.listingContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+.listingInfo {
+  flex: 1;
+} .listingInfo p {
+  margin: 5px 0;
+} .listingInfo a {
+  color: #2f9632;
+  text-decoration: none;
+} .listingInfo a:hover {
+  text-decoration: underline;
+}
+
+.itemName {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Lucida Sans', sans-serif;
+} .itemOwner {
+  font-size: 20px;
+  font-style: italic;
+  font-weight: light;
+} .itemDesc {
+  font-size: 18px;
+}

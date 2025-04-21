@@ -5,11 +5,13 @@
     <RouterLink to="/newlisting"><button v-if="isOwner">Add New Listing</button></RouterLink>
   <div>
     <h2>Listings</h2>
-    <ul>
-      <li v-for="item in userListings" :key="item.id">
-        <p>{{ item.name }}</p>
-        <p>{{ item.description }}</p>
-        <img v-bind:src="item.imageUrl" style="max-width:30%">
+    <ul class="listingContainer">
+      <li v-for="item in userListings" :key="item.id" class="listing">
+        <img v-bind:src="item.imageUrl">
+        <div class="listingInfo">
+          <p class="itemName">{{ item.name }}</p>
+          <p class="itemDesc">{{ item.description }}</p>
+        </div>
       </li>
     </ul>
   </div>
