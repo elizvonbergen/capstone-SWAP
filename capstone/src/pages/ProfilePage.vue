@@ -1,20 +1,25 @@
 <template>
+  <section class="profile">
     <h1>{{  userProfile?.name || 'User' }}</h1>
     <p>Username: {{ userProfile?.username }}</p>
     <p v-if="isOwner">Email: {{ userProfile?.email }}</p>
     <RouterLink to="/newlisting"><button v-if="isOwner">Add New Listing</button></RouterLink>
-  <div>
-    <h2>Listings</h2>
-    <ul class="listingContainer">
-      <li v-for="item in userListings" :key="item.id" class="listing">
-        <img v-bind:src="item.imageUrl">
-        <div class="listingInfo">
-          <p class="itemName">{{ item.name }}</p>
-          <p class="itemDesc">{{ item.description }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
+  </section>
+
+  <section>
+    <div>
+      <h2>Listings</h2>
+      <ul class="listingContainer">
+        <li v-for="item in userListings" :key="item.id" class="listing">
+          <img v-bind:src="item.imageUrl">
+          <div class="listingInfo">
+            <p class="itemName">{{ item.name }}</p>
+            <p class="itemDesc">{{ item.description }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
 </template>
 
 <script setup>
