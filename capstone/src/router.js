@@ -10,6 +10,7 @@ import SignupPage from './pages/SignupPage.vue'
 import ProfilePage from './pages/ProfilePage.vue'
 import CreateListingPage from './pages/CreateListingPage.vue'
 import SwapRequestsPage from './pages/SwapRequestsPage.vue'
+import MessagingPage from './pages/MessagingPage.vue'
 
 //routing for different views
 const routes = [{
@@ -40,6 +41,9 @@ const routes = [{
     }, {
         path: '/swaprequests',
         component: SwapRequestsPage,
+    }, {
+        path: '/messages',                   //CHANGE ROUTE LATER TO INCLUDE IDs
+        component: MessagingPage,
     }
 ]
 
