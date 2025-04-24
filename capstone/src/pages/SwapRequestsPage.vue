@@ -20,8 +20,7 @@
             <routerLink :to="{ name: 'Messages', params: { requestId: req.id } }">
                 Message {{ req.senderUsername }}
             </routerLink>
-        </div>
-        
+        </div>     
     </li>
     </div>
     <div v-else>
@@ -33,6 +32,12 @@
     <li v-for="req in sentRequests" :key="req.id">
         <p>{{ req.senderItem?.name || '...' }} for {{ req.receiverUsername }}'s {{ req.receiverItem?.name || '...' }}</p>
         <p>Status: {{ req.status }}</p>
+
+        <div v-if="req.status == 'approved'"> <!-- if status is approved -->
+            <routerLink :to="{ name: 'Messages', params: { requestId: req.id } }">
+                Message {{ req.receiverUsername }}
+            </routerLink>
+        </div>
     </li>
     </div>
     <div v-else>
