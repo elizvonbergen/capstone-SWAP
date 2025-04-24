@@ -38,6 +38,9 @@
                 Message {{ req.receiverUsername }}
             </routerLink>
         </div>
+        <div v-if="req.status == 'denied'">
+            <button @click="deleteRequest(req.id)"> Delete </button>
+        </div>
     </li>
     </div>
     <div v-else>
@@ -49,7 +52,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { auth, db } from '../firebase/firebase'
-import { collection, query, where, getDocs, doc, getDoc, orderBy, updateDoc } from 'firebase/firestore'
+import { collection, query, where, getDocs, doc, getDoc, orderBy, updateDoc, deleteDoc } from 'firebase/firestore'
 
 const sentRequests = ref([])
 const receivedRequests = ref([])
@@ -87,6 +90,19 @@ const updateStatus = async (requestId, newStatus) => {
         }
     } catch (err) {
         console.error('Error updating request status. ', err)
+    }
+}
+
+//delete request
+const deleteRequest = async (requestId) => {
+    try {
+        const requestRef = doc(db, 'swapRequests', requestId)
+        await deleteDoc(requestRef)
+
+        //remove from array (local)
+        sentRequests.value = sentRequests.value.filter(req => req.id !== requestId)
+    } catch (err) {
+        console.error('Error deleting request: ', err)
     }
 }
 
