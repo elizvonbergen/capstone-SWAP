@@ -12,9 +12,9 @@ Please add information such as brand, color, quality, etc..."></textarea>
         </form>
 
         <div v-if="imageErrorMessage" class="popup"> {{ imageErrorMessage }} </div> <!-- error popup for invalid images-->
-        <div v-if="errorMessage.length" class="popup"> <!-- error popup for empty values -->
+        <div v-if="errorMessage.length"> <!-- error popup for empty values -->
         <ul>
-          <li v-for="(message, index) in errorMessage" :key="index">
+          <li v-for="(message, index) in errorMessage" :key="index" class="popup">
             {{ message }}
           </li>
         </ul>

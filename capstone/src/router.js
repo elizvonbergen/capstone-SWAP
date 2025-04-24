@@ -42,8 +42,9 @@ const routes = [{
         path: '/swaprequests',
         component: SwapRequestsPage,
     }, {
-        path: '/messages',                   //CHANGE ROUTE LATER TO INCLUDE IDs
-        component: MessagingPage,
+        path: '/messages/:requestId',    
+        name: 'Messages',
+        component: MessagingPage,  
     }
 ]
 

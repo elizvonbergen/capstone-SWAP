@@ -17,7 +17,9 @@
                 Deny</button>
         </div>
         <div v-if="req.status == 'approved'"> <!-- if status is approved -->
-            <button @click="message">Message {{ req.senderUsername }}</button>
+            <routerLink :to="{ name: 'Messages', params: { requestId: req.id } }">
+                Message {{ req.senderUsername }}
+            </routerLink>
         </div>
         
     </li>
@@ -43,11 +45,9 @@
 import { ref, onMounted } from 'vue'
 import { auth, db } from '../firebase/firebase'
 import { collection, query, where, getDocs, doc, getDoc, orderBy, updateDoc } from 'firebase/firestore'
-import { useRouter } from 'vue-router'
 
 const sentRequests = ref([])
 const receivedRequests = ref([])
-const router = useRouter()
 
 //get listing info
 const fetchItem = async (listingId) => {
@@ -83,15 +83,6 @@ const updateStatus = async (requestId, newStatus) => {
     } catch (err) {
         console.error('Error updating request status. ', err)
     }
-}
-
-// route user to messaging page if button clicked
-const message = async () =>{
-  try {
-    router.push('/messages')
-  } catch (err) {
-    console.error('Error accessing messages... ', err)
-  }
 }
 
 onMounted(async () => {
