@@ -38,7 +38,7 @@
                 Message {{ req.receiverUsername }}
             </routerLink>
         </div>
-        <div v-if="req.status == 'denied'">
+        <div v-if="req.status == 'denied' || req.status == 'pending'">
             <button @click="deleteRequest(req.id)"> Delete </button>
         </div>
     </li>

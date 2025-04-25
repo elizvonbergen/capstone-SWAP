@@ -10,7 +10,7 @@
     </div>
 
     <div class="inputBox">
-      <input v-model="newMessage" placeholder="Type a message..." />
+      <input v-model="newMessage" placeholder="Type a message..." @keyup.enter="sendMessage"/>
       <button @click="sendMessage">Send</button>
     </div>
 </template>

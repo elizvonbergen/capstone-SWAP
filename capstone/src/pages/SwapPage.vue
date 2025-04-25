@@ -13,8 +13,13 @@
       <label>Select an item to offer:</label>
       <select v-model="selectedItemId">
 
-        <option v-for="item in userItems" :value="item.id" :key="item.id">
+        <option v-for="item in userItems" 
+                :value="item.id" 
+                :key="item.id"
+                :disabled="item.isApproved == true">
+                <!-- prevents approved items from showing as an option -->
           {{ item.name }}
+          {{ item.isApproved == true ? '(swap in progress)' : '' }}
         </option>
       </select>
 
