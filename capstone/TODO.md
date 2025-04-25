@@ -2,6 +2,8 @@
 ### GENERAL
 - [x] create functional nav bar for every page
 - [ ] style pages (lowest priority)
+- [ ] Style MessagingPage.vue
+- [ ] Style SwapRequestsPage.vue
 
 ### HOMEPAGE
 - [x] show listings from all users
@@ -13,16 +15,19 @@
 - [x] include information on page
 - [x] show specific information currently viewed profile is the logged user's
 - [x] show user's listings
-- [ ] allow user to edit THEIR OWN profile
 
 ### CLOTHING DETAILS
 - [x] fill page with content
-- [ ] add swap request button that directs to swap form page
+- [x] add swap request button that directs to swap form page
 
 ### LISTINGS PAGE
 - [x] fill page with listings
-- [ ] add search/sorting feature
+- [x] add search/sorting feature
 
 ### SWAP REQUEST
-- [ ] create request form in db
-- [ ] fill page with content
+- [x] create request form in db
+- [x] fill page with content
+
+## FINAL STEPS
+- [ ] Start testing
+- [ ] Record final tech demo presentation
