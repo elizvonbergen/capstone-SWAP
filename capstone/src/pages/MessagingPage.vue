@@ -1,5 +1,5 @@
 <template>
-    <h1>Message <!-- PUT OTHER PERSON'S USERNAME HERE--></h1>
+    <h1>Message</h1>
 
     <div class="messages">
       <div v-for="msg in messages" :key="msg.id" :class="{'mine': msg.senderId === user?.uid}">

@@ -25,8 +25,8 @@
             <button v-if="req.status == 'approved' && !req.deletionRequestedBy"
             @click="requestSwapDeletion(req.id)"> Mark Swap as Completed</button>
         </div>
-        <div> <!-- if deletion started and user is NOT the one who submitted request -->
-            <button v-if="req.deletionRequestedBy !== auth.currentUser"
+        <div> <!-- if status is approved and deletion started and user is NOT the one who submitted request -->
+            <button v-if="req.status == 'approved' && req.deletionRequestedBy && req.deletionRequestedBy !== auth.currentUser"
             @click="approveDeletion(req.id)"> Mark Swap as Complete </button>
         </div>
     </li>
