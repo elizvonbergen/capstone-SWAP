@@ -10,13 +10,36 @@
     <div>
       <h2>Listings</h2>
       <ul class="listingContainer">
-        <li v-for="item in activeListings" :key="item.id" class="listing">
-          <img v-bind:src="item.imageUrl">
-          <div class="listingInfo">
-            <p class="itemName">{{ item.name }}</p>
-            <p class="itemDesc">{{ item.description }}</p>
-          </div>
-        </li>
+
+        <!-- if not owner, show only active listings -->
+        <div v-if="!isOwner">
+          <li v-for="item in activeListings" :key="item.id" class="listing">
+            <img v-bind:src="item.imageUrl">
+            <div class="listingInfo">
+              <p class="itemName">{{ item.name }}</p>
+              <p class="itemDesc">{{ item.description }}</p>
+            </div>
+          </li>
+          <p v-if="activeListings.length == 0">No listings available!</p> <!-- no available listings -->
+        </div>
+
+         <!-- if owner, show all listings -->
+        <div v-if="isOwner">
+          <li v-for="item in userListings" :key="item.id" class="listing">
+              <img v-bind:src="item.imageUrl">
+              <div class="listingInfo">
+                <p class="itemName">{{ item.name }}</p>
+                <p class="itemDesc">{{ item.description }}</p>
+                <div v-if="item.isActive">
+                  <button @click="deleteListing(item.id)"> Delete Listing </button>
+                </div>
+                <div v-else>
+                  <small>Item swapped.</small>
+                </div>
+              </div>
+            </li>
+            <p v-if="userListings.length == 0">No listings uploaded!</p> <!-- no uploaded listings-->
+        </div>
       </ul>
     </div>
   </section>
@@ -27,13 +50,26 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { auth, db } from '../firebase/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
-import { doc, getDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import { doc, getDoc, collection, getDocs, query, where, deleteDoc } from 'firebase/firestore'
 
 const route = useRoute()
 const userId = route.params.userId
 const userProfile = ref(null)
 const userListings = ref([])
 const isOwner = ref(false)
+
+//delete listing
+const deleteListing = async (item) => {
+    try {
+        const listingsRef = doc(db, 'listings', item)
+        await deleteDoc(listingsRef)
+
+        //remove from array (local)
+        userListings.value = userListings.value.filter(del => del.id !== item)
+    } catch (err) {
+        console.error('Error deleting request: ', err)
+    }
+}
 
 const activeListings = computed(() => //list of active listings ONLY
   userListings.value.filter(item => item.isActive == true))
