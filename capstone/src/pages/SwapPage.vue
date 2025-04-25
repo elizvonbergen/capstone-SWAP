@@ -61,6 +61,20 @@ const sendRequest = async () => {
   const currentUser = auth.currentUser
   if (!currentUser || !selectedItemId.value) { return }
 
+  //check for identical request
+  const existingQuery = query(
+    collection(db, 'swapRequests'),
+    where('senderListingId', '==', selectedItemId.value),
+    where('receiverListingId', '==', listingId)
+  )
+
+  const existingSnapshot = await getDocs(existingQuery)
+
+  if (!existingSnapshot.empty) {
+    successMessage.value = 'You have already sent this same request!'
+    return
+  }
+
   //add request to db
   await addDoc(collection(db, 'swapRequests'), {
     senderId: currentUser.uid,
