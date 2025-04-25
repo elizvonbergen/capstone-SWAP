@@ -10,7 +10,7 @@
     <div>
       <h2>Listings</h2>
       <ul class="listingContainer">
-        <li v-for="item in userListings" :key="item.id" class="listing">
+        <li v-for="item in activeListings" :key="item.id" class="listing">
           <img v-bind:src="item.imageUrl">
           <div class="listingInfo">
             <p class="itemName">{{ item.name }}</p>
@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { auth, db } from '../firebase/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -34,6 +34,9 @@ const userId = route.params.userId
 const userProfile = ref(null)
 const userListings = ref([])
 const isOwner = ref(false)
+
+const activeListings = computed(() => //list of active listings ONLY
+  userListings.value.filter(item => item.isActive == true))
 
 onMounted(async () => {
   //check if user is profile owner
@@ -62,8 +65,6 @@ onMounted(async () => {
       console.log('Fetched: ', listing)
       userListings.value.push(listing)
     })
-  }
-)
-}
-)
+  })
+})
 </script>

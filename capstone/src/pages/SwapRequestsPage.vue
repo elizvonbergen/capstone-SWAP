@@ -21,6 +21,14 @@
                 Message {{ req.senderUsername }}
             </routerLink>
         </div>     
+        <div> <!-- if status is approved AND no delete request yet -->
+            <button v-if="req.status == 'approved' && !req.deletionRequestedBy"
+            @click="requestSwapDeletion(req.id)"> Mark Swap as Completed</button>
+        </div>
+        <div> <!-- if deletion started and user is NOT the one who submitted request -->
+            <button v-if="req.deletionRequestedBy !== auth.currentUser"
+            @click="approveDeletion(req.id)"> Mark Swap as Complete </button>
+        </div>
     </li>
     </div>
     <div v-else>
@@ -52,7 +60,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { auth, db } from '../firebase/firebase'
-import { collection, query, where, getDocs, doc, getDoc, orderBy, updateDoc, deleteDoc } from 'firebase/firestore'
+import { collection, query, where, getDocs, doc, getDoc, orderBy, updateDoc, deleteDoc, serverTimestamp, setDoc } from 'firebase/firestore'
 
 const sentRequests = ref([])
 const receivedRequests = ref([])
@@ -93,7 +101,7 @@ const updateStatus = async (requestId, newStatus) => {
     }
 }
 
-//delete request
+//delete request (that user sent)
 const deleteRequest = async (requestId) => {
     try {
         const requestRef = doc(db, 'swapRequests', requestId)
@@ -104,6 +112,36 @@ const deleteRequest = async (requestId) => {
     } catch (err) {
         console.error('Error deleting request: ', err)
     }
+}
+
+//request deletion (swap was completed)
+const requestSwapDeletion = async (requestId) => {
+    const currentUser = auth.currentUser
+    await updateDoc(doc(db, 'swapRequests', requestId), {
+        deletionRequestedBy: currentUser.uid,
+        deletionApproved: true,
+    })
+}
+
+//delete swap
+    //NOTE: this moves them to a collection of completed swaps
+const approveDeletion = async (requestId) => {
+    const swapRef = doc(db, 'swapRequests', requestId)
+    const swapSnap = await getDoc(swapRef)
+
+    const swapData = swapSnap.data()
+
+    //log to completed collection
+    await setDoc(doc(db, 'swapCompleted', requestId), {
+        ...swapData,
+        completedAt: serverTimestamp()
+    })
+
+    //delete two listings from db
+
+    //delete swap request
+    await deleteDoc(swapRef)
+    alert("Swap confirmed as completed!")
 }
 
 onMounted(async () => {

@@ -86,6 +86,7 @@ const submitListing = async() => {
             ownerId: user.uid,
             createdAt: serverTimestamp(),
             isApproved: false,
+            isActive: true,
         })
         //push to details for new listing
         router.push(`/listings/${docRef.id}`)

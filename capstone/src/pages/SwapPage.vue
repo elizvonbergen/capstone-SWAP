@@ -83,6 +83,8 @@ const sendRequest = async () => {
     receiverListingId: listingId,
     status: 'pending',
     timestamp: serverTimestamp(),
+    deletionRequestedBy: '',
+    deletionApproved: false,
 })
 // show message upon successful send
 successMessage.value = 'Swap request sent successfully!'
