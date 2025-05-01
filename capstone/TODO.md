@@ -1,9 +1,8 @@
 # TODO LIST
 ### GENERAL
 - [x] create functional nav bar for every page
-- [ ] style pages (lowest priority)
-- [ ] Style MessagingPage.vue
-- [ ] Style SwapRequestsPage.vue
+- [x] Style MessagingPage.vue
+- [x] Style SwapRequestsPage.vue
 
 ### HOMEPAGE
 - [x] show listings from all users
@@ -29,5 +28,5 @@
 - [x] fill page with content
 
 ## FINAL STEPS
-- [ ] Start testing
+- [x] Testing
 - [ ] Record final tech demo presentation

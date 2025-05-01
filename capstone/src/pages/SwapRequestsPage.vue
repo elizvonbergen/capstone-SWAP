@@ -1,59 +1,68 @@
 <template>
-    <h1>Current Swap Requests</h1>
+    <h1 class="centered">Current Swap Requests</h1>
 
-    <h2>Received Requests</h2>
-    <div v-if="receivedRequests.length">
-    <li v-for="req in receivedRequests" :key="req.id">
-        <p>{{ req.senderUsername }}'s {{ req.senderItem?.name || '...' }} for your {{ req.receiverItem?.name || '...' }}</p>
-        <p>Status: {{ req.status }}</p>
-        <div v-if="req.status == 'pending'"> <!-- if status is pending approval/denial -->
+    <div class="requestSection"><h2>Received Requests</h2>
+    <div v-if="receivedRequests.length" class="requestList">
+    <li v-for="req in receivedRequests" :key="req.id" class="requestCard">
+        <p class="requestText">{{ req.senderUsername }}'s {{ req.senderItem?.name || '...' }} for your {{ req.receiverItem?.name || '...' }}</p>
+        <p class="requestStatus">Status: {{ req.status }}</p>
+
+        <div v-if="req.status == 'pending'" class="buttonGroup"> <!-- if status is pending approval/denial -->
             <button
                 @click="updateStatus(req.id, 'approved')"
-                :disabled="req.status !== 'pending'">
+                :disabled="req.status !== 'pending'"
+                class="approveBtn">
                 Approve</button>
             <button
                 @click="updateStatus(req.id, 'denied')"
-                :disabled="req.status !== 'pending'">
+                :disabled="req.status !== 'pending'"
+                class="denyBtn">
                 Deny</button>
         </div>
-        <div v-if="req.status == 'approved'"> <!-- if status is approved -->
+
+        <div v-if="req.status == 'approved'" class="messageLink"> <!-- if status is approved -->
             <routerLink :to="{ name: 'Messages', params: { requestId: req.id } }">
                 Message {{ req.senderUsername }}
             </routerLink>
-        </div>     
-        <div> <!-- if status is approved AND no delete request yet -->
+        </div> 
+
+        <div class="buttonGroup">
+            <!-- if status is approved AND no delete request yet -->
             <button v-if="req.status == 'approved' && !req.deletionRequestedBy"
-            @click="requestSwapDeletion(req.id)"> Mark Swap as Completed</button>
-        </div>
-        <div> <!-- if status is approved and deletion started and user is NOT the one who submitted request -->
+            @click="requestSwapDeletion(req.id)"
+            class="completeBtn"> Mark Swap as Completed</button>
+            
+            <!-- if status is approved and deletion started and user is NOT the one who submitted request -->
             <button v-if="req.status == 'approved' && req.deletionRequestedBy && req.deletionRequestedBy !== auth.currentUser"
-            @click="approveDeletion(req.id)"> Mark Swap as Complete </button>
+            @click="approveDeletion(req.id)"
+            class="completeBtn"> Mark Swap as Complete </button>
         </div>
     </li>
     </div>
-    <div v-else>
+    <div v-else class="emptyState">
         <p>No swap requests received yet.</p>
-    </div>
+    </div></div>
 
-    <h2>Sent Requests</h2>
-    <div v-if="sentRequests.length">
-    <li v-for="req in sentRequests" :key="req.id">
-        <p>{{ req.senderItem?.name || '...' }} for {{ req.receiverUsername }}'s {{ req.receiverItem?.name || '...' }}</p>
-        <p>Status: {{ req.status }}</p>
+    <div class="requestSection"><h2>Sent Requests</h2>
+    <div v-if="sentRequests.length" class="requestList">
+    <li v-for="req in sentRequests" :key="req.id" class="requestCard">
+        <p class="requestText">{{ req.senderItem?.name || '...' }} for {{ req.receiverUsername }}'s {{ req.receiverItem?.name || '...' }}</p>
+        <p class="requestStatus">Status: {{ req.status }}</p>
 
-        <div v-if="req.status == 'approved'"> <!-- if status is approved -->
+        <div v-if="req.status == 'approved'" class="messageLink"> <!-- if status is approved -->
             <routerLink :to="{ name: 'Messages', params: { requestId: req.id } }">
                 Message {{ req.receiverUsername }}
             </routerLink>
         </div>
-        <div v-if="req.status == 'denied' || req.status == 'pending'">
-            <button @click="deleteRequest(req.id)"> Delete </button>
+        <div v-if="req.status == 'denied' || req.status == 'pending'" class="buttonGroup">
+            <button @click="deleteRequest(req.id)" class="denyBtn"> Delete </button>
         </div>
     </li>
     </div>
-    <div v-else>
+    <div v-else class="emptyState">
         <p>No swap requests sent yet.</p>
-    </div>
+    </div></div>
+
 
 </template>
 
