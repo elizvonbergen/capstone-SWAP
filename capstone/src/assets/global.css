@@ -59,10 +59,11 @@ body {
   text-align: left;
 } .listing img {
   width: 350px;
-  height: auto;
-  margin-top: 10px;
+  height: 350px;
+  margin: 5px;
   object-fit: cover;
   align-items: center;
+  border-radius: 4px;
 }
 
 .listingContainer {
@@ -101,7 +102,7 @@ body {
 .search {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px;
+  justify-content: center;
 } .search input {
   margin-left: 50px;
   width: 25%;

@@ -8,7 +8,7 @@
 
   <section>
     <div>
-      <h2>Listings</h2>
+      <h2 class="centered">Listings</h2>
       <ul class="listingContainer">
 
         <!-- if not owner, show only active listings -->

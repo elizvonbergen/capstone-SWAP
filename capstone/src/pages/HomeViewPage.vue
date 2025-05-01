@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="centered">
       <h1>Swap. Style. Sustain.</h1>
       <p>
         Welcome to ClosetSwap – a platform where you can list your clothes, discover new styles, and swap fashion with others in the community. It’s sustainable, social, and stylish.
@@ -7,7 +7,7 @@
     </section>
 
     <section>
-      <h2>Newest Listings</h2>
+      <h2 class="centered">Newest Listings</h2>
       <ul class="listingContainer">
         <li v-for="item in userListings" :key="item.id" class="listing">
           <img v-bind:src="item.imageUrl">
