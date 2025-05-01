@@ -10,7 +10,6 @@
           <div class="listingInfo">
             <p class="itemName"><RouterLink :to="`/listings/${item.id}`">{{ item.name }}</RouterLink></p>
             <p class="itemOwner"><RouterLink :to="`/profile/${item.ownerId}`">{{ item.ownerUsername }}</RouterLink></p>
-            <p class="itemDesc">{{ item.description }}</p>
           </div>
         </li>
       </ul> 

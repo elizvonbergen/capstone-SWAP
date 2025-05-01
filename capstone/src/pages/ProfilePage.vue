@@ -12,35 +12,24 @@
       <ul class="listingContainer">
 
         <!-- if not owner, show only active listings -->
-        <div v-if="!isOwner">
-          <li v-for="item in activeListings" :key="item.id" class="listing">
-            <img v-bind:src="item.imageUrl">
-            <div class="listingInfo">
-              <p class="itemName">{{ item.name }}</p>
-              <p class="itemDesc">{{ item.description }}</p>
-            </div>
-          </li>
-          <p v-if="activeListings.length == 0">No listings available!</p> <!-- no available listings -->
-        </div>
-
-         <!-- if owner, show all listings -->
-        <div v-if="isOwner">
-          <li v-for="item in userListings" :key="item.id" class="listing">
+            <li v-for="item in isOwner ? userListings : activeListings" :key="item.id" class="listing">
               <img v-bind:src="item.imageUrl">
               <div class="listingInfo">
                 <p class="itemName">{{ item.name }}</p>
                 <p class="itemDesc">{{ item.description }}</p>
                 <div v-if="item.isActive">
-                  <button @click="deleteListing(item.id)"> Delete Listing </button>
-                </div>
-                <div v-else>
-                  <small>Item swapped.</small>
-                </div>
+                    <button @click="deleteListing(item.id)"> Delete Listing </button>
+                  </div>
+                  <div v-else>
+                    <small>Item swapped.</small>
+                  </div>
               </div>
             </li>
-            <p v-if="userListings.length == 0">No listings uploaded!</p> <!-- no uploaded listings-->
-        </div>
       </ul>
+
+      <p v-if="!isOwner && activeListings.length == 0">No listings available!</p> <!-- no available listings -->
+      <p v-if="isOwner && userListings.length == 0">No listings uploaded!</p> <!-- no uploaded listings-->
+
     </div>
   </section>
 </template>
