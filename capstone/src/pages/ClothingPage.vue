@@ -13,6 +13,9 @@
           </div>
         </li>
       </ul> 
+
+      <!-- if no such listings in database -->
+      <p v-if="searchListings.length == 0" class="emptyState">No listings available!</p>
     </section>
 </template>
 

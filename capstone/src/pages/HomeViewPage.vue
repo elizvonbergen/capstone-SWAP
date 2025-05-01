@@ -17,6 +17,9 @@
           </div>
         </li>
       </ul> 
+
+      <!-- if no listings in database -->
+      <p v-if="userListings.length == 0" class="emptyState">No listings available!</p>
     </section>
   </template>
 
@@ -28,13 +31,13 @@ import { collection, getDocs, query, orderBy, limit, doc, getDoc, where } from '
 const userListings = ref([])
 
 onMounted(async () => {
-    //get all listings, max of 10 to show at once
+    //get all listings, max of 9 to show at once
     const listingsRef = collection(db, 'listings')
     const listingsQuery = query(
       listingsRef,
       where('isApproved', '!=', true),
       orderBy('createdAt', 'desc'),
-      limit(10)
+      limit(9)
     )
     const querySnapshot = await getDocs(listingsQuery)
 
