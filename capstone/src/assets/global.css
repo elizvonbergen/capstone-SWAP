@@ -304,3 +304,71 @@ body {
   max-width: 300px;
   border-radius: 10px;
 }
+
+/* messaging */
+.messages {
+  max-width: 800px;
+  height: 500px;
+  margin: 0 auto 20px;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fdfdfd;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f9f9f9;
+}
+
+.messages > div {
+  padding: 12px 16px;
+  border-radius: 10px;
+  max-width: 60%;
+  word-wrap: break-word;
+  background-color: #d7d7d7;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.messages > div.mine {
+  background-color: #c1edcc;
+  align-self: flex-end;
+}
+
+.messages p {
+  margin: 4px 0;
+}
+
+.inputBox {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.inputBox input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.inputBox button {
+  padding: 10px 16px;
+  border: none;
+  background-color: #2f9632;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.inputBox button:hover {
+  background-color: #257728;
+}
+
+/* swap request */

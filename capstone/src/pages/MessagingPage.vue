@@ -1,7 +1,7 @@
 <template>
     <h1>Message</h1>
 
-    <div class="messages">
+    <div ref="messagesContainer" class="messages">
       <div v-for="msg in messages" :key="msg.id" :class="{'mine': msg.senderId === user?.uid}">
         <p>{{ msg.text }}</p>
         <p><small>{{ msg.senderUsername }}
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { db, auth } from '../firebase/firebase'
 import { collection, query, orderBy, addDoc, onSnapshot, serverTimestamp, doc, getDoc } from 'firebase/firestore'
 import { useRoute } from 'vue-router'
@@ -25,6 +25,7 @@ const route = useRoute()
 const messages = ref([])
 const newMessage = ref('')
 const user = auth.currentUser
+const messagesContainer = ref(null)
 
 //get username
 const getUsername = async (userId) => {
@@ -39,6 +40,13 @@ const getUsername = async (userId) => {
         return null
     }
 }
+
+//watch for new messages & scroll to bottom
+watch(messages, async () => {
+  await nextTick()
+  const el = messagesContainer.value
+  if (el) el.scrollTop = el.scrollHeight
+})
 
 onMounted(() => {
   const requestId = route.params.requestId
